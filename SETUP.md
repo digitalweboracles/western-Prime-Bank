@@ -4,7 +4,9 @@ This repo auto-deploys on every push to `main`:
 
 1. **GitHub Actions** runs every file in `SQL/supabase/*.sql` against your
    Supabase project (idempotent — safe to re-run against a database that
-   already has some or all of it; existing data is left alone).
+   already has some or all of it; existing data is left alone), and deploys
+   every Supabase Edge Function in `supabase/functions/` (so auth flows
+   like `/register` work against the live project).
 2. **Railway** (connected to this GitHub repo) rebuilds and redeploys the
    site itself.
 
