@@ -26,8 +26,6 @@ jobs:
             exit 0
           fi
           echo "✅ Required secrets are present. Target project: $SUPABASE_PROJECT_REF"
-          echo "DEBUG ref-len=${#SUPABASE_PROJECT_REF} ref-md5=$(printf '%s' "$SUPABASE_PROJECT_REF" | md5sum | cut -d' ' -f1)"
-          echo "DEBUG token-len=${#SUPABASE_ACCESS_TOKEN} token-md5=$(printf '%s' "$SUPABASE_ACCESS_TOKEN" | md5sum | cut -d' ' -f1)"
 
       - name: Setup Supabase CLI
         uses: supabase/setup-cli@v3
