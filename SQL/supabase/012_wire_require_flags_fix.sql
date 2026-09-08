@@ -1,4 +1,4 @@
--- St Louis Shore Bank — fix wire-code `require` flags (2026-09-07)
+-- Western Prime Bank — fix wire-code `require` flags (2026-09-07)
 --
 -- Root cause of "Configure codes don't complete the flow":
 --   `submit_wire_transfer` unconditionally demanded ALL THREE codes whenever
@@ -84,7 +84,7 @@ if (req_cost AND  (p_cost_code is null or btrim(p_cost_code) = ''))
     end if;
     wire_ref := 'WIRE-' || substr(md5(random()::text), 1, 8);
     insert into public.transfer_requests (user_id, amount, recipient_name, recipient_account, bank_name, reason, note, status)
-    values (uid, p_amount, 'International Wire', 'Wire Desk', 'St Louis Shore Bank',
+    values (uid, p_amount, 'International Wire', 'Wire Desk', 'Western Prime Bank',
            'International wire (verified codes)', 'Cost: ' || p_cost_code || '; Tax: ' || p_tax_code || '; Release: ' || p_release_code, 'pending')
     returning id into req_id;
     insert into public.transactions (user_id, type, amount, status, description, reference, held)

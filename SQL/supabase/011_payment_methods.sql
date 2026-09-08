@@ -58,13 +58,13 @@ begin
      null, null, null, null, null, null, null, null,
      'Send only BTC to the wallet address above. After sending, click "Continue to Deposit" so admin can verify and credit your account. Confirmations may take up to 1 hour.'),
     ('bank_transfer', true, null, null,
-     'St Louis Shore Bank', 'St Louis Shore Bank Operations', '482100017788',
+     'Western Prime Bank', 'Western Prime Bank Operations', '482100017788',
      'BFBBUS33', 'GB29NWBK60161331926819', '1 Threadneedle Street, London, EC2R 8AH, United Kingdom', 'USD', null,
      'Please include your wallet address as the transfer reference. Funds credited within 1–3 business days after admin approval.'),
     ('paypal', true, null, null,
      null, null, null, null, null, null, null,
-     'deposits@stlouisshorebank.com',
-     'Send your payment via PayPal to the address above, then click "Continue to Deposit" to submit your request. Include your St Louis Shore Bank wallet address in the PayPal note. PayPal deposits are reviewed within 24 hours.')
+     'deposits@westernprimebank.com',
+     'Send your payment via PayPal to the address above, then click "Continue to Deposit" to submit your request. Include your Western Prime Bank wallet address in the PayPal note. PayPal deposits are reviewed within 24 hours.')
   on conflict (id) do nothing;
 
   alter table public.payment_methods enable row level security;

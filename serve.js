@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Self-contained St Louis Shore Bank server (no npm deps, no PHP).
+// Self-contained Western Prime Bank server (no npm deps, no PHP).
 //
 // - Serves the static site from public/ with the clean-URL rewrites from
 //   vercel.json (/login -> /login.html, /admin -> /admin.html, etc.).
@@ -219,7 +219,7 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`St Louis Shore Bank server listening on http://0.0.0.0:${PORT}`);
+  console.log(`Western Prime Bank server listening on http://0.0.0.0:${PORT}`);
   console.log(`  static root: ${PUBLIC}`);
   console.log(`  supabase proxy: /supa -> ${SUPABASE_API_URL}`);
 });

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# St Louis Shore Bank — bootstrap a NEW GitHub repo from this bundle, wire up
+# Western Prime Bank — bootstrap a NEW GitHub repo from this bundle, wire up
 # auto-deploy, and (optionally) create the Railway project.
 #
 # This is a brand-new, separate project. It does NOT touch any existing
@@ -7,7 +7,7 @@
 # (if you let it) a new GitHub repo and Railway project.
 #
 # HOW TO USE:
-#   1. Download st-louis-shore-bank.zip into your Downloads folder (leave it
+#   1. Download western-prime-bank.zip into your Downloads folder (leave it
 #      zipped — this script unzips it itself).
 #   2. Open Terminal and paste this whole script, then press Enter.
 #   3. Answer the prompts (GitHub repo name, whether to create it via `gh`,
@@ -21,17 +21,17 @@
 
 set -uo pipefail
 
-ZIP_PATH="$HOME/Downloads/st-louis-shore-bank.zip"
-TARGET_DIR="$HOME/st-louis-shore-bank"
+ZIP_PATH="$HOME/Downloads/western-prime-bank.zip"
+TARGET_DIR="$HOME/western-prime-bank"
 
 echo "============================================================"
-echo " St Louis Shore Bank — new project bootstrap"
+echo " Western Prime Bank — new project bootstrap"
 echo "============================================================"
 echo ""
 
 if [ ! -f "$ZIP_PATH" ]; then
   echo "Couldn't find $ZIP_PATH"
-  read -r -p "Enter the full path to st-louis-shore-bank.zip: " INPUT_ZIP
+  read -r -p "Enter the full path to western-prime-bank.zip: " INPUT_ZIP
   if [ -n "$INPUT_ZIP" ]; then ZIP_PATH="$INPUT_ZIP"; fi
 fi
 if [ ! -f "$ZIP_PATH" ]; then
@@ -71,24 +71,24 @@ echo ""
 echo "── Git ──────────────────────────────────────────────────────"
 git init -q
 if ! git config user.email >/dev/null 2>&1; then
-  git config user.email "deploy@st-louis-shore-bank.local"
-  git config user.name "St Louis Shore Bank Deploy"
+  git config user.email "deploy@western-prime-bank.local"
+  git config user.name "Western Prime Bank Deploy"
   echo "(no git identity was configured — set one locally for this repo only;"
   echo " run 'git config --global user.email/user.name' later to use your own)"
 fi
 git add -A
-if git commit -q -m "Initial commit: St Louis Shore Bank"; then
+if git commit -q -m "Initial commit: Western Prime Bank"; then
   echo "✅ Local git repo created at $TARGET_DIR"
 else
   echo "❌ 'git commit' failed — see the error above. Fix it, then from $TARGET_DIR run:"
-  echo "     git add -A && git commit -m 'Initial commit: St Louis Shore Bank'"
+  echo "     git add -A && git commit -m 'Initial commit: Western Prime Bank'"
   echo "   and re-run this script, or continue manually from here."
   exit 1
 fi
 
 echo ""
 echo "── GitHub ───────────────────────────────────────────────────"
-DEFAULT_REPO_NAME="st-louis-shore-bank"
+DEFAULT_REPO_NAME="western-prime-bank"
 read -r -p "GitHub repository name to create [$DEFAULT_REPO_NAME]: " REPO_NAME
 REPO_NAME="${REPO_NAME:-$DEFAULT_REPO_NAME}"
 

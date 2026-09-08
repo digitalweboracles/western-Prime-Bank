@@ -85,10 +85,10 @@ begin
   $f$;
 
 
-  -- Make sure admin@stlouisshorebank.com has admin role
+  -- Make sure admin@westernprimebank.com has admin role
   update public.profiles
   set role = 'admin'
-  where email = 'admin@stlouisshorebank.com';
+  where email = 'admin@westernprimebank.com';
 
   grant execute on function public.admin_get_all_users() to anon, authenticated;
   grant execute on function public.admin_set_user_status(uuid, text) to anon, authenticated;

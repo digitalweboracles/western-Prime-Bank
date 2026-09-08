@@ -1,4 +1,4 @@
-# St Louis Shore Bank
+# Western Prime Bank
 
 A static HTML/JS digital banking application backed by **Supabase**
 (Postgres + Auth + PostgREST). No PHP, no Laravel, no build step — every
@@ -48,8 +48,8 @@ to `main` auto-deploy the site and auto-run the database migrations.
 Requires Node 18+.
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/st-louis-shore-bank.git
-cd st-louis-shore-bank
+git clone https://github.com/YOUR_GITHUB_USERNAME/western-prime-bank.git
+cd western-prime-bank
 PORT=12000 SUPABASE_API_URL=https://YOUR-PROJECT-REF.supabase.co SUPABASE_ANON_KEY=YOUR_ANON_KEY node serve.js
 ```
 

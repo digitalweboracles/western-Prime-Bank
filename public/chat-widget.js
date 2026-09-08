@@ -1,5 +1,5 @@
 /**
- * St Louis Shore Bank Live Chat Widget
+ * Western Prime Bank Live Chat Widget
  * Attaches a floating 💬 button to any page.
  * User-facing: injects into dashboard.html / public pages.
  * Uses Supabase support_tickets + Realtime for instant delivery.
@@ -19,7 +19,7 @@
 
   const SUPA_URL = 'https://YOUR-PROJECT-REF.supabase.co';
   const SUPA_KEY = 'YOUR_SUPABASE_ANON_KEY';
-  const SUPPORT_EMAIL = 'support@stlouisshorebank.com';
+  const SUPPORT_EMAIL = 'support@westernprimebank.com';
 
   // ── Helpers ───────────────────────────────────────────────────────────────
   function esc(s) {
@@ -167,7 +167,7 @@
     <div class="mv-chat-head">
       <div class="mv-avatar">🏦</div>
       <div class="mv-chat-head-info">
-        <div class="mv-chat-head-title">St Louis Shore Bank Support</div>
+        <div class="mv-chat-head-title">Western Prime Bank Support</div>
         <div class="mv-chat-head-sub">We typically reply in minutes</div>
       </div>
       <div class="mv-online-dot"></div>

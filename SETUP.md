@@ -1,4 +1,4 @@
-# Setup — St Louis Shore Bank
+# Setup — Western Prime Bank
 
 This repo auto-deploys on every push to `main`:
 

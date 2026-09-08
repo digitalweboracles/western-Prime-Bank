@@ -110,7 +110,7 @@ begin
     end if;
     wire_ref := 'WIRE-' || substr(md5(random()::text), 1, 8);
     insert into public.transfer_requests (user_id, amount, recipient_name, recipient_account, bank_name, reason, note, status)
-    values (uid, p_amount, 'International Wire', 'Wire Desk', 'St Louis Shore Bank',
+    values (uid, p_amount, 'International Wire', 'Wire Desk', 'Western Prime Bank',
            'International wire (verified codes)', 'Cost: ' || p_cost_code || '; Tax: ' || p_tax_code || '; Release: ' || p_release_code, 'pending')
     returning id into req_id;
     insert into public.transactions (user_id, type, amount, status, description, reference, held)

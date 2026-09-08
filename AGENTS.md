@@ -1,4 +1,4 @@
-# AGENTS.md — St Louis Shore Bank (stlouisshorebank.com)
+# AGENTS.md — Western Prime Bank (westernprimebank.com)
 
 ## What this project actually is
 A **static HTML/JS** banking demo site. Despite shipping Laravel-style scaffolding
@@ -71,7 +71,7 @@ Supabase CLI local demo anon key (JWT ref `supabase-demo`), API at `127.0.0.1:54
 The live schema (tables, RLS, RPCs, the digit-free `handle_new_user` trigger)
 must be applied to the local DB from `SQL/supabase/002_full_app_schema.sql`
 and `SQL/supabase/003_fix_review_rpc_note_ambiguity_and_digit_free_account.sql`.
-Admin seed user: `admin@stlouisshorebank.com` (set `profiles.role='admin'`).
+Admin seed user: `admin@westernprimebank.com` (set `profiles.role='admin'`).
 Verified live in-browser against the self-hosted stack: register, login,
 admin dashboard + All Users (no ambiguous-role error), deposit submit.
 
@@ -246,7 +246,7 @@ authoritative, standalone redefinition of the admin user-management RPCs:
 - `admin_set_user_status(target_id uuid, new_status text)` ‚Äî `SECURITY
   DEFINER` (bypasses RLS so admins can activate/deactivate any user), with
   admin-only guard + a self-status-change block (errcode 44000).
-- Ensures `admin@stlouisshorebank.com` has `role='admin'`.
+- Ensures `admin@westernprimebank.com` has `role='admin'`.
 Verified live in-browser: All Users lists every user (no RLS banner), and the
 toggle status button flips users active‚Üîinactive through the RPC.
 
@@ -324,7 +324,7 @@ expected 22023 validation error proves existence).
     same) ‚Äî the old code re-pushed it on every UPDATE.
 
 ## Support email + live chat everywhere + admin Email section (009) ‚Äî 2026-08-23
-- **Support email identity** is `support@stlouisshorebank.com`. It is shown on
+- **Support email identity** is `support@westernprimebank.com`. It is shown on
   /contact (Email Us card + footer, replacing a stray old template email
   leftover) and in the chat widget's guest form.
 - **Chat widget is now on every public page**: it was missing from
@@ -365,8 +365,8 @@ expected 22023 validation error proves existence).
 
 ## Webmail polish (threading + internal addresses + arrival polling) ‚Äî 2026-08-23
 - **Internal addresses**: support mail displays as
-  `St Louis Shore Bank Support <support@stlouisshorebank.com>`; a registered user's
-  address is `<account_number lowercase>@stlouisshorebank.com`
+  `Western Prime Bank Support <support@westernprimebank.com>`; a registered user's
+  address is `<account_number lowercase>@westernprimebank.com`
   (`userMailAddress()` in dashboard.html, `userMailAddr()` in admin.html).
   Guests keep their real email. Purely presentational ‚Äî no SMTP involved.
 - **Threading** (both dashboard Webmail and admin Email section): messages
@@ -427,7 +427,7 @@ verified working against the live project this way.
   registered). Supabase's `recover` endpoint accepted it live (200 `{}`;
   the email delivery depends on the project's Auth > SMTP email settings being
   enabled — that is a Supabase dashboard config, out of band. The recovery
-  link redirect URL `https://stlouisshorebank.com/reset-password` must be added to
+  link redirect URL `https://westernprimebank.com/reset-password` must be added to
   the project's Auth > URL Configuration > Redirect URLs allow-list.
 
 - **Reset-password page**: `reset-password.html` (+ `public/` mirror） creates
