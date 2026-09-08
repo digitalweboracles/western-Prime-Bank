@@ -455,3 +455,39 @@ verified working against the live project this way.
 - **Gotcha**: a missing closing paren breaksthe whole inline `init()` → dashboard hung on "Loading ... forever. Always run `node --check` per inline `<script>` block (pre-existing legacy octal in old blocks fails node strict — compare against baseline; only actual parser errors like `missing )` matter).
 - E2E-verified (self-hosted stack`:admin edit BTC wallet → customer deposit BTC shows new wallet; bank name/account_number/bank_address → customer bank card shows them + copy buttons; PayPal email → customer PayPal card shows it; deactivate PayPal → customer tile + BTC box hide (DB `active=false`); reactivate → tile returns. Anon `get_active_payment_methods` returns only active rows.
 
+## 2026-09-08 — Register edge function deployment (resolved; Railway env was the real culprit)
+- **The deployed site was failing `/register` with `404 Requested function was not found`
+  even after CI successfully deployed the edge function. Root cause chain:
+  1. GitHub `SUPABASE_PROJECT_REF` was **already correct** — md5
+     `f59f411e851d66e9b638e5e877f2a6c1` = `fiiqlueqlkwzzvkifolf`
+     (project named **"western Prime bank"**, eu-west-1). CI deploy-functions
+     deploys `register` there (verified: POST → HTTP 400 with the function's own
+     JSON `{"error":"Invalid email or password (min. 6 characters)"}`).
+  2. The **live Railway app** was proxying to a **different, old Supabase
+     project `zhyxoibvvonyqrdkqgly`** (visible in `/supa/*` response headers:
+     `sb-project-ref: zhyxoibvvonyqrdkqgly`), where no edge function existed.
+
+- **Fix (owner action, no code change needed):** set Railway env vars on
+  the `western-prime-bank-production` app:
+  - `SUPABASE_API_URL=https://fiiqlueqlkwzzvkifolf.supabase.co`
+  - `SUPABASE_ANON_KEY=`ethe anon/publishable JWT of that project (starts
+    `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`; obtainable via Project
+    Settings → API or Management API `GET /v1/projects/{ref}/api-keys`).
+- **Service-role key note:** the register edge function uses
+  `supabase.auth.admin.createUser` (needs service_role; the platform
+  auto-injects `SUPABASE_SERVICE_ROLE_KEY` into hosted edge functions as a
+  default secret — no manual secret needed).
+- **Management API access:** the `sbp_` token the owner supplied
+  (`sbp_277e…c44f`) lists both projects (`kbaarecyekhhnxgrqptp` =
+  "digitalweboracles's Project", `fiiqlueqlkwzzvkifolf` = "western Prime bank").
+- **GH Actions secrets:** the repo's `SUPABASE_PROJECT_REF` is correct;the
+  `SUPABASE_ACCESS_TOKEN` (44-char value) is NOT a Supabase access token
+  shape (those are `sbp_…` 40+-char values), so CI's migrate job may still
+  fail auth when run — the owner should set `SUPABASE_ACCESS_TOKEN` to
+the owner's `sbp_…` access token (from Project Settings → Access Tokens),and
+  `SUPABASE_ANON_KEY` to the anon JWT above via repo Settings → Secrets.
+
+- CI workflow (`deploy.yml`) now has a `deploy-functions` job that deploys all
+  `supabase/functions/*/` (`--no-verify-jwt`) and verifies `/functions/v1/register`
+  is live (non-404) before the migration job runs; `migrate` has
+  `needs: deploy-functions`.
