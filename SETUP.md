@@ -37,6 +37,19 @@ repository secret**. Add:
 |---|---|
 | `SUPABASE_ACCESS_TOKEN` | the access token from step 1 |
 | `SUPABASE_PROJECT_REF` | the project ref from step 1 |
+> 
+> **Current production project (2026-09-08):** ref `fiiqlueqlkwzzvkifolf`.
+> Both `SUPABASE_PROJECT_REF` and `SUPABASE_ACCESS_TOKEN` **must** belong to
+> this exact project — else CI deploys migrations and edge functions to a
+> different (wrong) project and the live site keeps failing (e.g. `/register`
+> returns `404 Requested function was not found`). To fix: mint a fresh
+> access token (Project Settings → Access Tokens), then:
+> `gh secret set SUPABASE_PROJECT_REF --repo digitalweboracles/western-Prime-Bank --body "fiiqlueqlkwzzvkifolf"`
+> `gh secret set SUPABASE_ACCESS_TOKEN --repo digitalweboracles/western-Prime-Bank --body "<sbp_ YOUR NEW TOKEN>"`
+> `gh secret set SUPABASE_ANON_KEY --repo digitalweboracles/western-Prime-Bank --body "<anon key of fiiqlueqlkwzzvkifolf>"`
+> Then re-run the workflow (`.github/workflows/deploy.yml`) — it deploys
+> every `supabase/functions/*/` edge function (incl. `register`)and verifies
+> it is live before running migrations.
 | `SUPABASE_ANON_KEY` | the anon key from step 1 (used to verify the deploy worked) |
 
 That's it for GitHub. From now on, every push to `main` runs
